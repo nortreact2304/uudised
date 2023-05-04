@@ -6,18 +6,24 @@ const Layout = () => {
       <nav>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/">Kodu</Link>
           </li>
           <li>
-            <Link to="/blogs">Blogs</Link>
+            <Link to="/blogs">Postitused</Link>
           </li>
           <li>
-            <Link to="/contact">Contact</Link>
+            <Link to="/contact">Kontakt</Link>
+          </li>
+          <li>
+            <Link to="/services">Teenused</Link>
           </li>
         </ul>
       </nav>
 
       <Outlet />
+      <footer>
+            See on footer. Võta meiega <Link to="/contact">ühendust</Link>
+      </footer>
     </>
   )
 };
