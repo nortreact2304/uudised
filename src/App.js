@@ -53,7 +53,8 @@ function App() {
               id: record.sys.id,
               title: record.fields.pealkiri,
               content: record.fields.kirjeldus,
-              pictureUrl: assets[record.fields.paispilt.sys.id]
+              pictureUrl: assets[record.fields.paispilt.sys.id],
+              richContent: record.fields.sisu
             }
           })
           console.log(loadedPosts)
