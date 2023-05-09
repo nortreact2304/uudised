@@ -10,9 +10,6 @@ import Post from "./pages/Post";
 
 function App() {
 
-
-
-
   const [postitused, setPostitused] = useState([
     {
       id: 'eqweqwerqwe',
@@ -34,27 +31,33 @@ function App() {
 
   const spaceId = 'x4fu0qdm04eg'
   const accessToken = 'YF20d1dA7btBwoaIyy47StinqvjUL0Vnh-siZebu68s'
-  const contenfulUrl = `https://cdn.contentful.com/spaces/${spaceId}/environments/master/entries?access_token=${accessToken}`
+  const contenfulUrl = `http://localhost:8080/api/post`
   
   useEffect(() => {
       const fetchPosts = async () => {
-          const result = await fetch(contenfulUrl)
+          let result
+          try {
+            result = await fetch(contenfulUrl)
+            if (!result.ok) {
+              return
+            }
+          } catch (err) {
+            console.log("Viga!")
+            return false;
+          }
           const postsData = await result.json()
+          if (postsData.error) {
+            return;
+          }
           console.log(postsData)
-          const assets = {};
-          postsData.includes.Asset.forEach(element => {
-            assets[element.sys.id] = 'https:' + element.fields.file.url
-          });
-
-          
-          console.log(assets)
-          const loadedPosts = postsData.items.map((record) => {
+                  
+          const loadedPosts = postsData.map((record) => {
             return {
-              id: record.sys.id,
-              title: record.fields.pealkiri,
-              content: record.fields.kirjeldus,
-              pictureUrl: assets[record.fields.paispilt.sys.id],
-              richContent: record.fields.sisu
+              id: record.id,
+              title: record.title,
+              content: record.annotation,
+              pictureUrl: record.piccUrl,
+              fullContent: record.content
             }
           })
           console.log(loadedPosts)

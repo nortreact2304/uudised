@@ -10,7 +10,7 @@ function Post({postitused}) {
             <h1>{postData.title}</h1>
             <img className="postHeaderImage" src={postData.pictureUrl} alt={postData.title} />
             <div>
-                {documentToReactComponents(postData.richContent)}
+                {postData.fullContent}
             </div>
             
         </div>
